@@ -48,7 +48,6 @@ template.innerHTML = `
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: orange;
   }
 
   .binary {
