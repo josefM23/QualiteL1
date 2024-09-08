@@ -24,6 +24,15 @@ template.innerHTML = `
     padding: 10px;
     font-size: 16px;
     margin-right: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  button:hover {
+    background-color: darkgreen;
   }
 
   h2 {
@@ -39,6 +48,7 @@ template.innerHTML = `
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: orange;
   }
 
   .binary {
