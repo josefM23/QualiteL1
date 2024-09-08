@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-// Define template
+// Define template.
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -41,14 +41,38 @@ template.innerHTML = `
     flex-direction: column;
   }
 
+  .binary {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #00FF00;
+    animation: color-change 2s infinite;
+  }
+
+  @keyframes color-change {
+    0% { color: #00FF00; }
+    50% { color: #FF00FF; }
+    100% { color: #00FF00; }
+  }
+
 </style>
 <div class="hello">
   <h1>Välkommen till mjukvarukvalitet kursen!</h1>
   <input type= "text" id="nameInput" placeholder="Skriv dit namn">
   <button id="greetButton">Välkommen!</button>
   <h2 id="greetingMessage"></h2>
+  <div id= "binaryMessage" class="binary"></div>
 </div>
 `
+/**
+ * A function to convert a string to binary.
+ */
+function toBinary(text) {
+  return text.split('').map(char => {
+    return char.charCodeAt(0).toString(2).padStart(8, '0') // Convert to binary and pad to 8 bits.
+  }).join(' ')
+}
+
 /**
  * Define the 'hello-app' custom element.
  */
@@ -69,14 +93,20 @@ customElements.define('hello-app',
       const greetButton = this.shadowRoot.querySelector('#greetButton')
       const nameInput = this.shadowRoot.querySelector('#nameInput')
       const greetingMessage = this.shadowRoot.querySelector('#greetingMessage')
+      const binaryMessage = this.shadowRoot.querySelector('#binaryMessage')
 
-      // Event listener för hello.
+      // Event lisener för hello med binär konvertering.
       greetButton.addEventListener('click', () => {
         const name = nameInput.value
         if (name) {
           greetingMessage.textContent = 'Hej ' + name + ' Välkommen'
+
+          // Convert name to binary and display it.
+          const binaryName = toBinary(name)
+          binaryMessage.textContent = 'Ditt namn i binär form: ' + binaryName
         } else {
-          greetingMessage.textContent = 'Vara snäl och ange namnet!'
+          greetingMessage.textContent = 'Vara snäl och ange ditt namn!'
+          binaryMessage.textContent = '0'
         }
       })
         }})
